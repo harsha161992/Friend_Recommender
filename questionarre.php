@@ -1,15 +1,20 @@
+<?php
+   include('session.php');
+   ?>
 <!DOCTYPE html>
 <html>
    <head>
       <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
-      <link rel="stylesheet" type="text/css" href="my_style.css">
+      <link rel="stylesheet" type="text/css" href="font-awesome.min.css" />
       <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+      <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
       <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
       <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script type="text/javascript">
          $(document).ready(function() {
              $('#questions').DataTable( {
-             "iDisplayLength": 50
+             "iDisplayLength": 10
              } );   
          } );	
              
@@ -22,9 +27,28 @@
       <title>Questionarre</title>
    </head>
    <body>
-      <table border="1">
+      <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Friend Recommender</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="home.php">Home</a></li>
+      <li class="active"><a href="questionarre.php">Questionarre</a></li>
+      <li ><a href="profile.php">Profile</a></li>
+       <li><a href="recommend.php">Recommend a friend</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello <?php echo $_SESSION['login_user'] ?></a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+      <table id="rating" border="1" bgcolor="#000000">
          <tr>
-            <th> Disagree Strongly </th>
+            <th color="#ffffff"> Disagree Strongly </th>
             <th> Disagree a little </th>
             <th> Neither agree nor disagree </th>
             <th> Agree a little </th>
@@ -324,15 +348,12 @@
          <br/>
          <br/>
          
-         <br/>
-         <br/>
-           <input type="submit" name="save" value="Save">
-        <input type="submit" name="submit" value="Submit">
+           <input type="submit" name="save" value="Save" class="btn btn-success">
+        <input type="submit" name="submit" value="Submit" class="btn btn-success">
        
       </form>
 
-       <A HREF="index1.php">Home</A>
-      <A HREF="logout.php">Logout</A>
-       <A HREF="recommend.php">Recommend</A>
+      
+    </div>
    </body>
 </html>

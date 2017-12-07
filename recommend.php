@@ -1,7 +1,39 @@
-<html>
-      <head>
-         <title> Register details </title> </head>
-      <body>
+<?php
+   include('session.php');
+   ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Friend Recommender</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Friend Recommender</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="home.php">Home</a></li>
+      <li><a href="questionarre.php">Questionarre</a></li>
+      <li><a href="profile.php">Profile</a></li>
+      <li class="active"><a href="recommend.php">Recommend a friend</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello <?php echo $_SESSION['login_user'] ?></a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
 
 <?php
 session_start();
@@ -57,16 +89,86 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
         }}
 
        
-        echo $minEmailId;
+       // echo $minEmailId;
         
         $query4  = "INSERT INTO `user_friends` VALUES($email_id,$minEmailId,'PENDING')";
         $result4 = mysqli_query($connection, $query4);
-        ?>
-       <button type="submit" value="Submit">Accept</button>
-        <button type="submit" value="Submit">Reject</button>
-         <button type="submit" value="Submit">Recommend Another</button>
 
+          $query5  = "SELECT * FROM `user_details` WHERE email_id = $minEmailId";
+             $result5 = mysqli_query($connection,$query5);
+               //echo $result;
+               $row5 = mysqli_fetch_array($result5,MYSQLI_ASSOC);
+            $recommendedName = $row5['name'];
+             $recommendedDOB = $row5['date_of_birth'];
+              $recommendedSex = $row5['sex'];
+               $recommendedProfession = $row5['profession'];
+                $recommendedDegree = $row5['degree'];
+
+        ?>
+
+          <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="recommend.php" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend class="text-center">Profile</legend>
     
+            <!-- Message body -->
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Name</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedName; ?>">
+              </div>
+            </div>
+
+             <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Sex</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedSex; ?>">
+              </div>
+            </div>
+
+             <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Date of Birth</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedDOB; ?>">
+              </div>
+            </div>
+
+             <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Profession</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedProfession; ?>">
+              </div>
+            </div>
+
+             <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Degree</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedDegree; ?>">
+              </div>
+            </div>
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                  <button type="submit" value="Submit" class="btn btn-success">Accept</button>
+        <button type="submit" value="Submit" class="btn btn-success">Reject</button>
+         <button type="submit" value="Submit" class="btn btn-success">Recommend Another</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+  </div>    
+
+    </div>
+
     
 </body>
 </html>

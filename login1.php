@@ -9,7 +9,7 @@
          $password = $_POST['password'];
          
            $query = "SELECT email_id FROM `user_details` WHERE email_id='$emailId' and password='$password'";
-         //echo $connection;
+         
            
                $result = mysqli_query($connection,$query);
                //echo $result;
@@ -24,7 +24,7 @@
                     echo $emailId;
                   $_SESSION['login_user'] = $emailId;
                  echo "yo";
-                  header("location: index1.php");
+                  header("location: home.php");
                }else {
                   echo "Your Login Name or Password is invalid";
                }
