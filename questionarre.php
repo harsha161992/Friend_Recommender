@@ -9,10 +9,15 @@
       <script type="text/javascript">
          $(document).ready(function() {
              $('#questions').DataTable( {
-               "ordering": false
-             } );
+             "iDisplayLength": 50
+             } );   
          } );	
              
+      </script>
+      <script type="text/javascript">
+           $(document).ready(function() {
+  
+       } );    
       </script>
       <title>Questionarre</title>
    </head>
@@ -101,6 +106,9 @@
                		$question49 = $row['question49'];
                		$question50 = $row['question50'];
                	}
+                     
+
+  
          ?>
       <form method="POST" action="save_questionarre.php">
          <table id= "questions" border="1" class="dataTable">
@@ -318,9 +326,13 @@
          
          <br/>
          <br/>
-         <input type="submit"> </input>
+           <input type="submit" name="save" value="Save">
+        <input type="submit" name="submit" value="Submit">
+       
       </form>
+
        <A HREF="index1.php">Home</A>
       <A HREF="logout.php">Logout</A>
+       <A HREF="recommend.php">Recommend</A>
    </body>
 </html>
