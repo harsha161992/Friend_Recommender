@@ -25,6 +25,7 @@
       <li><a href="questionarre.php">Questionarre</a></li>
       <li class="active"><a href="profile.php">Profile</a></li>
       <li><a href="recommend.php">Recommend a friend</a></li>
+         <li><a href="pending.php">Pending Requests</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello <?php echo $_SESSION['login_user'] ?></a></li>
@@ -37,7 +38,7 @@
   <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
-          <form class="form-horizontal" action="upload.php" method="post" enctype="multipart/form-data">
+          <form class="form-horizontal" action="upload.php" method="post">
           <fieldset>
             <legend class="text-center">Profile</legend>
     
@@ -49,9 +50,9 @@
               </div>
             </div>
              <div class="form-group">
-              <label class="col-md-3 control-label" for="message"> Select image to upload:</label>
+              <label class="col-md-3 control-label" for="likes"> Likes:</label>
               <div class="col-md-9">
-                  <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+                  <textarea class="form-control" id="likes" name="likes" placeholder="Please enter what you like doing..." rows="5"></textarea>
               </div>
             </div>
             <!-- Form actions -->

@@ -1,14 +1,45 @@
-<html>
-      <head>
-         <title> Register details </title>
-      <body>
+<?php
+   include('session.php');
+   include('connect.php');
+   ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Friend Recommender</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Friend Recommender</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="home.php">Home</a></li>
+      <li><a href="questionarre.php">Questionarre</a></li>
+      <li><a href="profile.php">Profile</a></li>
+      <li><a href="recommend.php">Recommend a friend</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello <?php echo $_SESSION['login_user'] ?></a></li>
+      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
          <?php
 session_start();
-
-$connection = mysqli_connect('localhost', 'root', 'root', 'friends');
 $email_id   = "'" . $_SESSION['login_user'] . "'";
 
-if (isset($_POST['submit']) || isset($_POST['save'])) 
+if (isset($_POST['submit'])) 
 {
     $question1  = (isset($_POST["question1"]) && !empty($_POST["question1"]) ? $_POST["question1"] : "NULL");
     $question2  = (isset($_POST["question2"]) && !empty($_POST["question2"]) ? $_POST["question2"] : "NULL");
@@ -74,78 +105,12 @@ if (isset($_POST['submit']) || isset($_POST['save']))
         $query1 = "UPDATE `personality_details` SET question1 = $question1, question2 = $question2,question3 = $question3,question4 = $question4,question5 = $question5,question6 = $question6,question7 = $question7,question8 = $question8,question9 = $question9,question10 = $question10,question11 = $question11, question12 = $question12,question13 = $question13,question14 = $question14,question15 = $question15,question16 = $question16,question17 = $question17,question18 = $question18,question19 = $question19,question20 = $question20,question21 = $question21, question22 = $question22,question23 = $question23,question24 = $question24,question25 = $question25,question26 = $question26,question27 = $question27,question28 = $question28,question29 = $question29,question30 = $question30,question31 = $question31, question32 = $question32,question33 = $question33,question34 = $question34,question35 = $question35,question36 = $question36,question37 = $question37,question38 = $question38,question39 = $question39,question40 = $question40,question41 = $question41, question42 = $question42,question43 = $question43,question44 = $question44,question45 = $question45, question46 = $question46,question47 = $question47,question48 = $question48,question49 = $question49, question50 = $question50 where email_id= $email_id";
         //echo $query1;
         $result = mysqli_query($connection, $query1);
-        echo "Updated successfully";
     } else {
         $query  = "INSERT INTO `personality_details` VALUES ($email_id,$question1, $question2,$question3,$question4,$question5,$question6,$question7,$question8,$question9,$question10,$question11, $question12,$question13,$question14,$question15,$question16,$question17,$question18,$question19,$question20,$question21, $question22,$question23,$question24,$question25,$question26,$question27,$question28,$question29,$question30,$question31, $question32,$question33,$question34,$question35,$question36,$question37,$question38,$question39,$question40,$question41, $question42,$question43,$question44,$question45,$question46,$question47,$question48,$question49,$question50,NULL,NULL,NULL,NULL,NULL)";
         $result = mysqli_query($connection, $query);
-        echo "Saved successfully";
     }
-      }
 
-if (isset($_POST['submit'])) {
 
-    $query1 = "SELECT * FROM `personality_details` WHERE email_id=$email_id";
-    $result = mysqli_query($connection, $query1);
-    //echo $result;
-    $row    = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    //$active = $row['active'];
-    
-    $count = mysqli_num_rows($result);
-    //echo $count;
-    if ($count == 1) {
-
-        //echo JSON.stringify($row);
-        $question1  = $row['question1'];
-        $question2  = $row['question2'];
-        $question3  = $row['question3'];
-        $question4  = $row['question4'];
-        $question5  = $row['question5'];
-        $question6  = $row['question6'];
-        $question7  = $row['question7'];
-        $question8  = $row['question8'];
-        $question9  = $row['question9'];
-        $question10 = $row['question10'];
-        $question11 = $row['question11'];
-        $question12 = $row['question12'];
-        $question13 = $row['question13'];
-        $question14 = $row['question14'];
-        $question15 = $row['question15'];
-        $question16 = $row['question16'];
-        $question17 = $row['question17'];
-        $question18 = $row['question18'];
-        $question19 = $row['question19'];
-        $question20 = $row['question20'];
-        $question21 = $row['question21'];
-        $question22 = $row['question22'];
-        $question23 = $row['question23'];
-        $question24 = $row['question24'];
-        $question25 = $row['question25'];
-        $question26 = $row['question26'];
-        $question27 = $row['question27'];
-        $question28 = $row['question28'];
-        $question29 = $row['question29'];
-        $question30 = $row['question30'];
-        $question31 = $row['question31'];
-        $question32 = $row['question32'];
-        $question33 = $row['question33'];
-        $question34 = $row['question34'];
-        $question35 = $row['question35'];
-        $question36 = $row['question36'];
-        $question37 = $row['question37'];
-        $question38 = $row['question38'];
-        $question39 = $row['question39'];
-        $question40 = $row['question40'];
-        $question41 = $row['question41'];
-        $question42 = $row['question42'];
-        $question43 = $row['question43'];
-        $question44 = $row['question44'];
-        $question45 = $row['question45'];
-        $question46 = $row['question46'];
-        $question47 = $row['question47'];
-        $question48 = $row['question48'];
-        $question49 = $row['question49'];
-        $question50 = $row['question50'];
-        
         $quality1 = (20 + $question1 - $question6 + $question11 - $question16 + $question21 - $question26 + $question31 - $question36 + $question41 - $question46) / 10;
         $quality2 = (14 - $question2 + $question7 - ($question12) + $question17 - $question22 + ($question27) - $question32 + ($question37) + $question42 + $question47) / 10;
         $quality3 = (14 + $question3 - ($question8) + $question13 - $question18 + ($question23) - $question28 + ($question33) - $question38 + ($question43) + $quality48) / 10;
@@ -154,20 +119,13 @@ if (isset($_POST['submit'])) {
         
         $query2  = "UPDATE `personality_details` SET quality1 = $quality1, quality2 = $quality2, quality3 = $quality3, quality4=$quality4, quality5=$quality5 where email_id = $email_id";
         $result2 = mysqli_query($connection, $query2);
-        
-        echo "Updated successfully";
+         header("location: recommend.php");
+      }
 
 
-
-
- }
-}
 
 ?>
-           <A HREF="index1.php">Home</A>
-           <A HREF="recommend.php">Recommend</A>
-            <A HREF="questionarre.php">Questionarre</A>
-         <A HREF="logout.php">Logout</A>
+  </div>        
       </body>
       </head>
    </html>

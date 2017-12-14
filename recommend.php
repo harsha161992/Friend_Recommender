@@ -1,5 +1,6 @@
 <?php
    include('session.php');
+    include('connect.php');
    ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +26,7 @@
       <li><a href="questionarre.php">Questionarre</a></li>
       <li><a href="profile.php">Profile</a></li>
       <li class="active"><a href="recommend.php">Recommend a friend</a></li>
+         <li><a href="pending.php">Pending Requests</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello <?php echo $_SESSION['login_user'] ?></a></li>
@@ -38,8 +40,13 @@
 <?php
 session_start();
 
-$connection = mysqli_connect('localhost', 'root', 'root', 'friends');
 $email_id   = "'" . $_SESSION['login_user'] . "'";
+if (isset($_POST['request'])) 
+{
+  $minemail_id   = "'" . $_POST['minEmailId'] . "'";
+        $query1 = "UPDATE `user_friends` SET status = 'PENDING' WHERE user1=$email_id AND user2=$minemail_id";
+        $result = mysqli_query($connection, $query1);
+}
 
         $query3        = "SELECT * FROM `personality_details`";
         $result3       = mysqli_query($connection, $query3);
@@ -73,6 +80,7 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
                $currEmailId = "'" . $row3['email_id'] . "'";
                 $query5  = "SELECT * FROM `user_friends` WHERE user1 = $email_id and user2 = $currEmailId";
                 $query6  = "SELECT * FROM `user_friends` WHERE user1 = $currEmailId and user2 = $email_id ";
+				//echo $query5;
                 $result5 = mysqli_query($connection, $query5);
                 $count1  = mysqli_num_rows($result5);
                 $result6 = mysqli_query($connection, $query6);
@@ -88,22 +96,27 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
             }
         }}
 
-       
-       // echo $minEmailId;
-        
+       //echo "yo";
+       //echo $minEmailId;
+        if($minEmailId!=""){
+			//echo "not";
         $query4  = "INSERT INTO `user_friends` VALUES($email_id,$minEmailId,'PENDING')";
         $result4 = mysqli_query($connection, $query4);
 
           $query5  = "SELECT * FROM `user_details` WHERE email_id = $minEmailId";
+		 // echo $query5;
              $result5 = mysqli_query($connection,$query5);
-               //echo $result;
-               $row5 = mysqli_fetch_array($result5,MYSQLI_ASSOC);
+			 $count = mysqli_num_rows($result5);
+			 if($count> 0) {
+				// echo "bjk";
+				 $row5    = mysqli_fetch_array($result5, MYSQLI_ASSOC);
             $recommendedName = $row5['name'];
              $recommendedDOB = $row5['date_of_birth'];
               $recommendedSex = $row5['sex'];
                $recommendedProfession = $row5['profession'];
                 $recommendedDegree = $row5['degree'];
-
+			 }
+		}
         ?>
 
           <div class="row">
@@ -121,12 +134,12 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
                 <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedName; ?>">
               </div>
             </div>
-
+             <input type="hidden" name="minEmailId" value= "<?php echo $minEmailId; ?>" >
              <!-- Name input-->
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">Sex</label>
               <div class="col-md-9">
-                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedSex; ?>">
+                <input id="sex" name="sex" type="text" class="form-control" value= "<?php echo $recommendedSex; ?>">
               </div>
             </div>
 
@@ -134,7 +147,7 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">Date of Birth</label>
               <div class="col-md-9">
-                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedDOB; ?>">
+                <input id="dob" name="dob" type="text" class="form-control" value= "<?php echo $recommendedDOB; ?>">
               </div>
             </div>
 
@@ -142,7 +155,7 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">Profession</label>
               <div class="col-md-9">
-                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedProfession; ?>">
+                <input id="profession" name="profession" type="text" class="form-control" value= "<?php echo $recommendedProfession; ?>">
               </div>
             </div>
 
@@ -150,14 +163,14 @@ $email_id   = "'" . $_SESSION['login_user'] . "'";
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">Degree</label>
               <div class="col-md-9">
-                <input id="name" name="name" type="text" class="form-control" value= "<?php echo $recommendedDegree; ?>">
+                <input id="degree" name="degree" type="text" class="form-control" value= "<?php echo $recommendedDegree; ?>">
               </div>
             </div>
             <!-- Form actions -->
             <div class="form-group">
               <div class="col-md-12 text-right">
-                  <button type="submit" value="Submit" class="btn btn-success">Accept</button>
-        <button type="submit" value="Submit" class="btn btn-success">Reject</button>
+                  <input type="submit" name="request" value="Send Request" id="request" class="btn btn-success" >
+             
          <button type="submit" value="Submit" class="btn btn-success">Recommend Another</button>
               </div>
             </div>

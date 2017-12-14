@@ -1,9 +1,12 @@
+<?php
+   include('connect.php');
+?>
 <html>
    <head>
       <title> Register details </title>
    <body>
       <?php
-         require('connect.php');
+    
          $emailId = $_POST['emailId'];
          $password = $_POST['password'];
          $name = $_POST['name'];
@@ -17,10 +20,10 @@
          //echo $connection;
                  $result = mysqli_query($connection, $query);
                  if($result){
-                     echo "User Created Successfully."; ?>
-                     <A HREF="login.php">Login</A>
-                 <?php }else{
-                     echo "User Registration Failed";
+                   header("location: index.php");
+                     
+                  }else{
+                   header("location: index.php");
                  }
          ?>
    </body>

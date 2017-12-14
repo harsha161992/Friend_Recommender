@@ -1,17 +1,18 @@
 <?php
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}
+   include('session.php');
+   include('connect.php');
+   ?>
+<?php
+session_start();
+$email_id   = "'" . $_SESSION['login_user'] . "'";
+		$message = "'" . $_POST['message'] . "'";
+    $likes = "'" . $_POST['likes'] . "'";
+		$query1 = "UPDATE user_details SET biodata=$message,likes=$likes where email_id = $email_id"; 
+        echo $query1;
+        $result = mysqli_query($connection, $query1);
+        //echo "Updated successfully";
+		 header("location: profile.php");
+		
+   
+
 ?>

@@ -1,5 +1,6 @@
 <?php
    include('session.php');
+     include('connect.php');
    ?>
 <!DOCTYPE html>
 <html>
@@ -14,16 +15,12 @@
       <script type="text/javascript">
          $(document).ready(function() {
              $('#questions').DataTable( {
-             "iDisplayLength": 10
+             "iDisplayLength": 50
              } );   
          } );	
              
       </script>
-      <script type="text/javascript">
-           $(document).ready(function() {
-  
-       } );    
-      </script>
+
       <title>Questionarre</title>
    </head>
    <body>
@@ -37,6 +34,7 @@
       <li class="active"><a href="questionarre.php">Questionarre</a></li>
       <li ><a href="profile.php">Profile</a></li>
        <li><a href="recommend.php">Recommend a friend</a></li>
+          <li><a href="pending.php">Pending Requests</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello <?php echo $_SESSION['login_user'] ?></a></li>
@@ -67,7 +65,7 @@
       <br/>
       <?php
          session_start();
-         $connection = mysqli_connect('localhost', 'root', 'root','friends');
+       
          $email_id = "'".$_SESSION['login_user']."'";
          $query1 = "SELECT * FROM `personality_details` WHERE email_id=$email_id";
           $result = mysqli_query($connection,$query1);
@@ -130,9 +128,6 @@
                		$question49 = $row['question49'];
                		$question50 = $row['question50'];
                	}
-                     
-
-  
          ?>
       <form method="POST" action="save_questionarre.php">
          <table id= "questions" border="1" class="dataTable">
@@ -145,215 +140,210 @@
             <tbody>
                <tr>
                   <td>I am the life of the party </td>
-                  <?php echo "<td><input type='text' name='question1' value='$question1'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question1' value='$question1' required/></td>"; ?>
                </tr>
                <tr>
                   <td>I feel little concern for others </td>
-                  <?php echo "<td><input type='text' name='question2' value='$question2'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question2' value='$question2' required /></td>"; ?>
                </tr>
                <tr>
                   <td> I am always prepared </td>
-                  <?php echo "<td><input type='text' name='question3' value='$question3'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question3' value='$question3' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I get stressed out easily </td>
-                  <?php echo "<td><input type='text' name='question4' value='$question4'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question4' value='$question4' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I have a rich vocabulary </td>
-                  <?php echo "<td><input type='text' name='question5' value='$question5'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question5' value='$question5' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I don't talk a lot </td>
-                  <?php echo "<td><input type='text' name='question6' value='$question6'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question6' value='$question6' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am interested in people </td>
-                  <?php echo "<td><input type='text' name='question7' value='$question7'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question7' value='$question7'required /></td>"; ?>
                </tr>
                <tr>
                   <td> I leave my belongings around </td>
-                  <?php echo "<td><input type='text' name='question8' value='$question8'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question8' value='$question8' required>/</td>"; ?>
                </tr>
                <tr>
                   <td> I am relaxed most of the time </td>
-                  <?php echo "<td><input type='text' name='question9' value='$question9'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question9' value='$question9' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I have difficulty understanding abstract ideas </td>
-                  <?php echo "<td><input type='text' name='question10' value='$question10'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question10' value='$question10' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I feel comfortable around people </td>
-                  <?php echo "<td><input type='text' name='question11' value='$question11'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question11' value='$question11' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I insult people </td>
-                  <?php echo "<td><input type='text' name='question12' value='$question12'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question12' value='$question12' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I pay attention to details </td>
-                  <?php echo "<td><input type='text' name='question13' value='$question13'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question13' value='$question13' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I worry about things </td>
-                  <?php echo "<td><input type='text' name='question14' value='$question14'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question14' value='$question14' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I have a vivid imagination </td>
-                  <?php echo "<td><input type='text' name='question15' value='$question15'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question15' value='$question15' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I keep in the background </td>
-                  <?php echo "<td><input type='text' name='question16' value='$question16'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question16' value='$question16' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I sympathize with others' feelings </td>
-                  <?php echo "<td><input type='text' name='question17' value='$question17'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question17' value='$question17' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I make a mess of things </td>
-                  <?php echo "<td><input type='text' name='question18' value='$question18'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question18' value='$question18' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I seldom feel blue </td>
-                  <?php echo "<td><input type='text' name='question19' value='$question19'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question19' value='$question19' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am not interested in abstract ideas </td>
-                  <?php echo "<td><input type='text' name='question20' value='$question20'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question20' value='$question20' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I start conversations </td>
-                  <?php echo "<td><input type='text' name='question21' value='$question21'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question21' value='$question21' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am not interested in other people's problems </td>
-                  <?php echo "<td><input type='text' name='question22' value='$question22'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question22' value='$question22' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I get chores done right away </td>
-                  <?php echo "<td><input type='text' name='question23' value='$question23'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question23' value='$question23' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am easily disturbed </td>
-                  <?php echo "<td><input type='text' name='question24' value='$question24'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question24' value='$question24' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I have excellent ideas </td>
-                  <?php echo "<td><input type='text' name='question25' value='$question25'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question25' value='$question25' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I have little to say </td>
-                  <?php echo "<td><input type='text' name='question26' value='$question26'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question26' value='$question26' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I have a soft heart </td>
-                  <?php echo "<td><input type='text' name='question27' value='$question27'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question27' value='$question27' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I often forget to put things back in their proper place </td>
-                  <?php echo "<td><input type='text' name='question28' value='$question28'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question28' value='$question28' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I get upset easily </td>
-                  <?php echo "<td><input type='text' name='question29' value='$question29'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question29' value='$question29' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I do not have a good imagination </td>
-                  <?php echo "<td><input type='text' name='question30' value='$question30'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question30' value='$question30' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I talk to a lot of different people at parties </td>
-                  <?php echo "<td><input type='text' name='question31' value='$question31'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question31' value='$question31' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am not really interested in others </td>
-                  <?php echo "<td><input type='text' name='question32' value='$question32'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question32' value='$question32' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I like order </td>
-                  <?php echo "<td><input type='text' name='question33' value='$question33'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question33' value='$question33' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I change my mood a lot </td>
-                  <?php echo "<td><input type='text' name='question34' value='$question34'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question34' value='$question34' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am quick to understand things </td>
-                  <?php echo "<td><input type='text' name='question35' value='$question35'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question35' value='$question35' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I don't like to draw attention to myself </td>
-                  <?php echo "<td><input type='text' name='question36' value='$question36'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question36' value='$question36' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I take time out for others </td>
-                  <?php echo "<td><input type='text' name='question37' value='$question37'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question37' value='$question37' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I shirk my duties </td>
-                  <?php echo "<td><input type='text' name='question38' value='$question38'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question38' value='$question38' required/></td>"; ?>
                </tr>
                <tr>
                   <td> Have frequent mood swings </td>
-                  <?php echo "<td><input type='text' name='question39' value='$question39'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question39' value='$question39' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I use difficult words </td>
-                  <?php echo "<td><input type='text' name='question40' value='$question40'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question40' value='$question40' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I don't mind being the center of attention </td>
-                  <?php echo "<td><input type='text' name='question41' value='$question41'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question41' value='$question41' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I feel others' emotions </td>
-                  <?php echo "<td><input type='text' name='question42' value='$question42'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question42' value='$question42' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I follow a schedule </td>
-                  <?php echo "<td><input type='text' name='question43' value='$question43'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question43' value='$question43' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I get irritated easily </td>
-                  <?php echo "<td><input type='text' name='question44' value='$question44'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question44' value='$question44' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I spend time reflecting on things </td>
-                  <?php echo "<td><input type='text' name='question45' value='$question45'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question45' value='$question45' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am quiet around strangers </td>
-                  <?php echo "<td><input type='text' name='question46' value='$question46'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question46' value='$question46' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I make people feel at ease </td>
-                  <?php echo "<td><input type='text' name='question47' value='$question47'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question47' value='$question47' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am exacting in my work </td>
-                  <?php echo "<td><input type='text' name='question48' value='$question48'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question48' value='$question48' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I often feel blue </td>
-                  <?php echo "<td><input type='text' name='question49' value='$question49'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question49' value='$question49' required/></td>"; ?>
                </tr>
                <tr>
                   <td> I am full of ideas </td>
-                  <?php echo "<td><input type='text' name='question50' value='$question50'/></td>"; ?>
+                  <?php echo "<td><input type='text' name='question50' value='$question50' required/></td>"; ?>
                </tr>
             </tbody>
          </table>
          <br/>
          <br/>
-         
-           <input type="submit" name="save" value="Save" class="btn btn-success">
-        <input type="submit" name="submit" value="Submit" class="btn btn-success">
-       
+        <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success" >
       </form>
-
-      
     </div>
    </body>
 </html>

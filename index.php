@@ -16,7 +16,7 @@
         <div class="container">
            
             <header>
-                <center> <h1>Friend Recommender!</h1> </center>
+                <center> <h1>Friend Recommender!</h1></center>
 				
             </header>
             <section>				
@@ -66,23 +66,23 @@
                                 </p>
                                 <p> 
                                     <label for="name" class="youmail"  > Name </label>
-                                    <input id="name" name="name" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                    <input id="name" name="name" required="required" placeholder="mysupermail@mail.com"/> 
                                 </p>
                                 <p> 
                                     <label for="profession" class="youpasswd" > Profession </label>
-                                    <input id="profession" name="profession" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <input id="profession" name="profession" required="required"  placeholder="eg. X8df!90EO"/>
                                 </p>
                                 <p> 
                                     <label for="dob" class="youpasswd" > Date of birth </label>
-                                    <input id="dob" name="dob" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <input id="dob" name="dob" required="required"  placeholder="eg. X8df!90EO"/>
                                 </p>
                                  <p> 
                                     <label for="sex" class="youpasswd" > Sex </label>
-                                    <input id="sex" name="sex" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <input id="sex" name="sex" required="required"  placeholder="eg. X8df!90EO"/>
                                 </p>
                                 <p> 
                                     <label for="degree" class="youpasswd" > Degree </label>
-                                    <input id="degree" name="degree" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <input id="degree" name="degree" required="required"  placeholder="eg. X8df!90EO"/>
                                 </p>
                                 <p class="signin button"> 
 									<input type="submit" value="Sign up"/> 
