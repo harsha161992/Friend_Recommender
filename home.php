@@ -59,7 +59,10 @@ $query5  = "SELECT * FROM `user_details` WHERE email_id = $user1";
   $dob = $row5['date_of_birth'];
   $profession = $row5['profession'];
   $degree = $row5['degree'];
-  $sex = $row5['sex']; ?>
+  $sex = $row5['sex']; 
+   $biodata = $row5['biodata'];
+    $likes = $row5['likes'];
+  ?>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
@@ -107,7 +110,21 @@ $query5  = "SELECT * FROM `user_details` WHERE email_id = $user1";
                 <input id="degree" name="degree" type="text" class="form-control" value= "<?php echo $degree; ?>">
               </div>
             </div>
-            
+
+                <div class="form-group">
+              <label class="col-md-3 control-label" for="biodata">Biodata</label>
+              <div class="col-md-9">
+                <input id="biodata" name="biodata" type="text" class="form-control" value= "<?php echo $biodata; ?>">
+              </div>
+            </div>
+
+                <div class="form-group">
+              <label class="col-md-3 control-label" for="likes">Likes</label>
+              <div class="col-md-9">
+                <input id="likes" name="likes" type="text" class="form-control" value= "<?php echo $likes; ?>">
+              </div>
+            </div>
+
           </fieldset>
           </form>
         </div>

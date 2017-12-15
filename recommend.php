@@ -43,8 +43,11 @@ session_start();
 $email_id   = "'" . $_SESSION['login_user'] . "'";
 if (isset($_POST['request'])) 
 {
-  $minemail_id   = "'" . $_POST['minEmailId'] . "'";
-        $query1 = "UPDATE `user_friends` SET status = 'PENDING' WHERE user1=$email_id AND user2=$minemail_id";
+  //echo "here";
+  $minemail_id   = $_POST['minEmailId'];
+  //echo $minEmailId;
+        $query1 = "UPDATE `user_friends` SET status = 'REQUEST' WHERE user1=$email_id AND user2=$minemail_id";
+        //echo $query1;
         $result = mysqli_query($connection, $query1);
 }
 
@@ -115,6 +118,9 @@ if (isset($_POST['request']))
               $recommendedSex = $row5['sex'];
                $recommendedProfession = $row5['profession'];
                 $recommendedDegree = $row5['degree'];
+                   $biodata = $row5['biodata'];
+    $likes = $row5['likes'];
+  
 			 }
 		}
         ?>
@@ -166,6 +172,22 @@ if (isset($_POST['request']))
                 <input id="degree" name="degree" type="text" class="form-control" value= "<?php echo $recommendedDegree; ?>">
               </div>
             </div>
+
+
+                <div class="form-group">
+              <label class="col-md-3 control-label" for="biodata">Biodata</label>
+              <div class="col-md-9">
+                <input id="biodata" name="biodata" type="text" class="form-control" value= "<?php echo $biodata; ?>">
+              </div>
+            </div>
+
+                <div class="form-group">
+              <label class="col-md-3 control-label" for="likes">Likes</label>
+              <div class="col-md-9">
+                <input id="likes" name="likes" type="text" class="form-control" value= "<?php echo $likes; ?>">
+              </div>
+            </div>
+
             <!-- Form actions -->
             <div class="form-group">
               <div class="col-md-12 text-right">
@@ -174,6 +196,7 @@ if (isset($_POST['request']))
          <button type="submit" value="Submit" class="btn btn-success">Recommend Another</button>
               </div>
             </div>
+
           </fieldset>
           </form>
         </div>

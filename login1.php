@@ -12,6 +12,8 @@
          $emailId = $_POST['emailId'];
          $password = $_POST['password'];
          
+
+
            $query = "SELECT email_id FROM `user_details` WHERE email_id='$emailId' and password='$password'";
          
            //echo $query;
@@ -23,12 +25,17 @@
                $count = mysqli_num_rows($result);
                 //echo $count;
                if($count == 1) {
-         
-                  //session_register("emailId");
-                   // echo $emailId;
+                  
                   $_SESSION['login_user'] = $emailId;
-                // echo "yo";
+                if (preg_match('/admin/',$emailId))
+                  {
+                    echo "here";
+                    header("location: homeadmin.php");
+                  }
+                  else{
+             echo $emailId;
                   header("location: home.php");
+                }
                }else {
                   echo "Your Login Name or Password is invalid";
                }

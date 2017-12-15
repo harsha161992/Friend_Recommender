@@ -1,4 +1,5 @@
 #questions tr td {
     height: 30px;
+    width: 200px !important;
     background-color: white !important;
 }
